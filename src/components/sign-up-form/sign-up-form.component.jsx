@@ -50,14 +50,14 @@ const SignUpForm = () => {
   return (
     <div>
       <h1>Sign up with your email and password</h1>
-      <form onSubmit={handleSubmit}>        
-        <FormInput label="Display name" inputOptions={{type: "text", required: true, onChange: handleChange, name: "displayName", value: {displayName}}} />
+      <form onSubmit={handleSubmit}>
+        <FormInput label="Display name" type="text" required onChange={handleChange} name="displayName" value={displayName}/>
         
         <FormInput label="Email" type="email" required onChange={handleChange} name="email" value={email}/>
         
-        <FormInput label="Password" type="password" required onChange={handleChange} name="password" value={password}  />
+        <FormInput label="Password" type="password" required onChange={handleChange} name="password" value={password}/>
         
-        <FormInput label="Confirm password" type="password" required onChange={handleChange} name="confirmPassword" value={confirmPassword}  />
+        <FormInput label="Confirm password" type="password" required onChange={handleChange} name="confirmPassword" value={confirmPassword}/>
         <button type="submit">Submit</button>
       </form>
     </div>
