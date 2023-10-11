@@ -3,12 +3,10 @@ import { Routes, Route } from 'react-router-dom'
 import Home from './routes/home/home'
 import Authentication from './routes/authentication/authentication'
 import Navigation from './components/navigation/navigation.component'
+import Shop from './routes/shop/shop.component'
 
 import './index.scss'
 
-const Shop = () => {
-  return <div>SHOP</div>
-}
 
 const App = () => {
   return (
