@@ -1,16 +1,23 @@
-import { Fragment, useContext } from "react";
+import { Fragment, useContext, useState } from "react";
 import { Outlet, Link } from "react-router-dom";
 
 import CartIcon from "../cart-icon/cart-icon.component";
 import CartDroprdown from "../cart-dropdown/card-dropdown.component";
 
 import { UserContext } from "../../context/user.context";
+import { CartContext } from "../../context/cart.context";
 import { signOutUser } from "../../utils/firebase/firebase.utils";
 
 import "./navigation.styles.scss";
 
 const Navigation = () => {
   const { currentUser } = useContext(UserContext);
+  const { isCartOpen, setIsCartOpen } = useContext(CartContext)
+  // const [dropdownOpen, setDropdownOpen] = useState(false)
+
+  // const ToggleCartOpen = () => {
+  //   setDropdownOpen(!dropdownOpen)
+  // }
 
   return (
     <Fragment>
@@ -31,7 +38,7 @@ const Navigation = () => {
           )}
           <CartIcon />
         </div>
-        <CartDroprdown />
+        { isCartOpen && <CartDroprdown />}
       </nav>
 
       <Outlet />
