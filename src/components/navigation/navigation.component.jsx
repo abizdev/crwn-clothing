@@ -1,6 +1,7 @@
 import { Fragment, useContext, useState } from "react";
 import { Outlet, Link } from "react-router-dom";
 
+import LogoSvg from '../../assets/crown.svg'
 import CartIcon from "../cart-icon/cart-icon.component";
 import CartDroprdown from "../cart-dropdown/card-dropdown.component";
 
@@ -20,7 +21,7 @@ const Navigation = () => {
     <Fragment>
       <NavigationContainer>
         <LogoContainer to="/">
-          <img src="/src/assets/crown.svg" alt="logo" className="logo" />
+          <img src={LogoSvg} alt="logo" className="logo" />
         </LogoContainer>
         <NavLinks>
           <NavLink to="/shop">
