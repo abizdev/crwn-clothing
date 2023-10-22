@@ -11,7 +11,7 @@ export const CategoryPreviewContainer = styled.div`
     cursor: pointer;
   }
 `
-export const CategoryPreview = styled.div`
+export const CategoryPreviewItems = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   column-gap: 20px;
