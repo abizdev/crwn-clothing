@@ -20,16 +20,13 @@ export const ImageContainer = styled.div`
 `
 
 export const Name = styled.span`
-  width: 23%;
+  width: 25%;
 `
 
-export const Price = styled.span`
-  ${Name}
-`
+export const Price = styled(Name)``
 
-export const Quantity = styled.span`
-  ${Name}
-
+export const Quantity = styled(Name)`
+  ${Name};
   display: flex;
   
   .arrow {
