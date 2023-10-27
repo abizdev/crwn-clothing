@@ -9,9 +9,7 @@ const DirectoryItem = ({ category }) => {
 
   return (
     <DirectoryItemContainer key={id} onClick={onNavigateHandler}>
-      <BackgroundImage imageUrl={imageUrl} style={{
-        backgroundImage: `url(${imageUrl})`
-      }} />
+      <BackgroundImage imageUrl={imageUrl} />
       <Body>
         <h2>{title}</h2>
         <p>Shop Now</p>

@@ -7,4 +7,4 @@ const middleWares = [logger]
 
 const composedEnhances = compose(applyMiddleware(...middleWares))
 
-export const store = createStore(rootReducer, undefined, middleWares)
+export const store = createStore(rootReducer, undefined, composedEnhances)

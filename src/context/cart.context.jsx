@@ -1,5 +1,5 @@
-import { createContext, useState, useEffect, useReducer } from "react";
-
+import { createContext, useReducer } from "react";
+import { createAction } from "../utils/reducer/reducer.utils";
 
 const addCartItem = (cartItems, productToAdd) => {
   const existingCartItem = cartItems.find((cartItem) => cartItem.id === productToAdd.id)
@@ -42,28 +42,25 @@ export const CartContext = createContext({
   cartCount: 0,
   cartTotal: 0
 })
-export const CART_ACTION_TYPE = {
-  ADD_CART_ITEM: 'ADD_CART_ITEM',
-  REMOVE_CART_ITEM: 'REMOVE_CART_ITEM',
-  CLEAR_CART_ITEM: 'CLEAR_CART_ITEM',
+const CART_ACTION_TYPES = {
+  SET_CART_ITEMS: 'SET_CART_ITEMS',
+  SET_IS_CART_OPEN: 'SET_IS_CART_OPEN',
 }
 
 const cartReducer = (state, action) => {
   const { type, payload } = action
-  const { cartItems, cartCount, cartTotal, isCartOpen } = state
 
   switch(type) {
-    case 'SET_CART_ITEMS':
+    case CART_ACTION_TYPES.SET_CART_ITEMS:
       return {
         ...state,
         ...payload
       }
-    case CART_ACTION_TYPE.REMOVE_CART_ITEM:
-      removeCartItem(cartItems, payload)
-      break
-    case CART_ACTION_TYPE.CLEAR_CART_ITEM:
-      clearCartItem(cartItems, payload)
-      break
+    case CART_ACTION_TYPES.SET_IS_CART_OPEN:
+      return {
+        ...state,
+        isCartOpen: payload,
+      }
     default:
       throw new Error(`Unhandled type ${type} in the cartReducer`)
 
@@ -83,7 +80,7 @@ export const CartProvier = ({ children }) => {
   const updateCardItemsReducer = (newCartItems) => {
     const newCartCount = newCartItems.reduce((total, cartItem) => total + cartItem.quantity, 0)
     const newCartTotal = newCartItems.reduce((total, cartItem) => total + cartItem.quantity * cartItem.price, 0)
-    dispatch({ type: 'SET_CART_ITEMS', payload: {cartItems: newCartItems, cartTotal: newCartTotal, cartCount: newCartCount}})
+    dispatch(createAction(CART_ACTION_TYPES.SET_CART_ITEMS, {cartItems: newCartItems, cartTotal: newCartTotal, cartCount: newCartCount}))
   }
 
   const addItemToCart = (productToAdd) => {
@@ -99,7 +96,11 @@ export const CartProvier = ({ children }) => {
     updateCardItemsReducer(newCartItems)
   }
 
-  const value = { isCartOpen, setIsCartOpen: () => true, addItemToCart, cartItems, cartCount, removeItemToCart, clearItemFromCart, cartTotal }
+  const setIsCartOpen = (bool) => {
+    dispatch(createAction(CART_ACTION_TYPES.SET_IS_CART_OPEN, bool))
+  }
+
+  const value = { isCartOpen, setIsCartOpen, addItemToCart, cartItems, cartCount, removeItemToCart, clearItemFromCart, cartTotal }
 
   return (
     <CartContext.Provider value={value}>{children}</CartContext.Provider>
