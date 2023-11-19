@@ -1,49 +1,48 @@
-import { useSelector } from 'react-redux'
+import { useSelector } from 'react-redux';
 
-import { selectCatrItems, selectCartTotal } from '../../store/cart/cart.selector'
+import {
+  selectCartItems,
+  selectCartTotal,
+} from '../../store/cart/cart.selector';
 
-import CheckoutItem from '../../components/checkout-item/checkout-item.component'
+import CheckoutItem from '../../components/checkout-item/checkout-item.component';
 
-import './checkout.styles.scss'
+import {
+  CheckoutContainer,
+  CheckoutHeader,
+  HeaderBlock,
+  Total,
+} from './checkout.styles';
 
 const Checkout = () => {
-  const cartItems = useSelector(selectCatrItems)
-  const cartTotal = useSelector(selectCartTotal)
+  const cartItems = useSelector(selectCartItems);
+  const cartTotal = useSelector(selectCartTotal);
 
   return (
-    <div className='checkout-container'>
-      <div className="checkout-header">
-        <div className="header-block">
+    <CheckoutContainer>
+      <CheckoutHeader>
+        <HeaderBlock>
           <span>Product</span>
-        </div>
-        <div className="header-block">
+        </HeaderBlock>
+        <HeaderBlock>
           <span>Description</span>
-        </div>
-        <div className="header-block">
+        </HeaderBlock>
+        <HeaderBlock>
           <span>Quantity</span>
-        </div>
-        <div className="header-block">
+        </HeaderBlock>
+        <HeaderBlock>
           <span>Price</span>
-        </div>
-        <div className="header-block">
+        </HeaderBlock>
+        <HeaderBlock>
           <span>Remove</span>
-        </div>
-      </div>
-      
+        </HeaderBlock>
+      </CheckoutHeader>
+      {cartItems.map((cartItem) => (
+        <CheckoutItem key={cartItem.id} cartItem={cartItem} />
+      ))}
+      <Total>Total: ${cartTotal}</Total>
+    </CheckoutContainer>
+  );
+};
 
-        {
-          cartItems.map((cartItem) => {
-            const { id } = cartItem
-
-            return(
-              <CheckoutItem key={id} cartItem={cartItem} />
-            )
-          })
-        }
-        <span className='total'>Total: ${cartTotal}</span>
-    </div>
-  )
-}
-
-export default Checkout
-
+export default Checkout;
