@@ -18,6 +18,7 @@ const middleWares = [process.env.NODE_ENV !== 'production' && logger, thunk].fil
   Boolean
 );
 
+
 const composeEnhancer =
   (process.env.NODE_ENV !== 'production' &&
     window &&
