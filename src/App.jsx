@@ -9,7 +9,7 @@ import Authentication from './routes/authentication/authentication.component'
 import Navigation from './routes/navigation/navigation.component'
 import Shop from './routes/shop/shop.component'
 import Checkout from './routes/checkout/checkout.component'
-import { setCurrentUser } from './store/user/user.action'
+import { checkUserSesstion } from './store/user/user.action'
 
 
 import './index.scss'
@@ -19,14 +19,7 @@ const App = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChangedListener((user) => {
-      if(user) {
-        createUserDocumentFromAuth(user)
-      }
-      dispatch(setCurrentUser(user))
-    })
-
-    return unsubscribe
+    dispatch(checkUserSesstion())
   }, [])
 
   return (
